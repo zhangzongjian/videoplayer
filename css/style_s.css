@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+
+html{
+font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+/* background-color:black; */
+/* background-image:url("backgroundimage.png"); */
+/* background-size:cover; */
+height:100%;
+}
+
+div.box{
+background-image: url("../img/background.png");
+height:100%;
+}
+
+p{
+font-size:18px;
+line-height:25px;
+}
+
+#topwrap{
+width:1024px;
+margin:0 auto;
+padding-top:1px;
+text-align:center;
+}
+small{
+font-size:13px;
+}
+.label{
+margin:40px auto 10px auto;
+background:aqua;
+border-radius:10px;
+background-color:black;
+background-color:rgba(0,0,0,0.5);
+
+}
+
+
+.flexwrap{
+display:flex;
+justify-content:center;
+}
+
+
+
+.textbox{
+border-radius:10px;
+background:black;
+background-color:rgba(20,20,20,0.5);
+}
+
+.textbox img{
+width:113px;
+}
+
+video{
+width:1024px;
+height:576px;
+}
+
+
+.box{
+width:190px;
+height:80px;
+
+border-radius:20px;
+margin:0 auto;
+padding-top:15px;
+opacity:0.7;
+}
+
+.box:hover{
+opacity:1.0;
+}
+
+.box p{
+text-shadow:0px -1px 2px #000000,0px 1px 2px #000000,1px 0px 2px #000000,-1px 0px 2px #000000;
+
+}
+
+.box1{
+margin-right:20px;
+background-color:rgba(200,200,200,0.5);
+background-image:url("http://placehold.it/300x400");
+}
+
+
+.box2{
+background-color:rgba(200,200,200,0.5);
+background-image:url("hinnyu.png");
+}
+
+
+
+a{
+text-decoration:none;
+}
+
+

@@ -1,0 +1,56 @@
+.nav-bar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+body {
+	line-height: 0px
+}
+
+article {
+    padding-right: 10px;
+}
+
+button.prev, button.next {
+    display: block;
+    background-image: url(./img/arrow.png);
+    background-repeat: no-repeat;
+    z-index: 9;
+}
+
+button.next {
+    background-position: -57px -398px;
+	width: 32px;
+	height: 80px;
+}
+
+button.prev {
+	background-position: -19px -99px;
+	width: 32px;
+	height: 80px;
+}
+
+.tabs-main {
+    padding: 0rem;
+}
+
+select.form-control {
+	display: inline;
+	width: auto;
+}
+
+.navbar-form {
+	margin: 0px;
+}
+
+input.form-control {
+	margin: 0px;
+}
+
+.font-size-small {
+	font-size: .75rem;
+}
+
+.font-size-big {
+	font-size: .9rem;
+}
