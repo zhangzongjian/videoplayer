@@ -58,12 +58,19 @@
                     </div>
                 </div>
                 <div class="tabs-panel tabs-main" id="panel585">
-                    <video width="100%" controls="false" id="video" poster="">
-					<source src="D:\音频视频\新建文件夹\livetune feat 初音ミク「Redial」Music Video 00_01_11-00_01_26.mp4">
-                        <source src="D:\音频视频\新建文件夹\播放视频new\data\video\042a_3.mp4">
-                        <source src="http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4">
+					<ul class="pager" id="videocenter">
+						<li><a style="background-color: rgba(0, 0, 0, 0)"><font color="white" id="videocenter-text">随便看看</font></a></li>
+					</ul>
+                    <video width="100%" controls id="video" poster="" controlslist="nodownload">
+                        <!-- <source src="http://192.168.1.7/D%3A/%E9%9F%B3%E9%A2%91%E8%A7%86%E9%A2%91/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/07.mp4"> -->
+                        <!-- <source src="http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"> -->
+						<source src="">
                         your browser does not support the video tag
                     </video>
+					<ul class="videocontrol pager">
+						<li><a><font color="black">ID:100001</font></a></li>
+						<li id="clearVideo"><a>清除</a></li>
+					</ul>
                 </div>
             </div>
             <ul class="tabs" data-tabs id="panel-content584" style="border-top:0px"> 
@@ -224,17 +231,69 @@
         <script>
 			$(document).foundation();
 			
+			/** 视频操作 **/
+			var pause = "播放";
+			var waiting = ["缓冲中","缓冲中.","缓冲中..","缓冲中..."];
+			var randomView = "随便看看";
+			var timerId = -1;
+			var i = 0;
+			
+			$("#videocenter-text").html(randomView);
+			$("#videocenter").show();
+			
 			var video=document.getElementById("video");
-			video.onended = function() {console.log("播放完毕");}
-			video.onpause = function() {console.log("暂停");};
-			video.onwaiting = function() {console.log("缓冲");};
-			video.onplaying = function() {console.log("播放");}
+			video.onended = function() {
+				$("#videocenter-text").html(randomView);
+				$("#videocenter").show(); 
+			}
+			video.onpause = function() { 
+				$("#videocenter-text").html(pause);
+				$("#videocenter").show(); 
+			};
+			video.onwaiting = function() { 
+				if(timerId == -1) {
+					timerId = window.setInterval(function(){
+						$("#videocenter-text").html(waiting[i++]);
+						if(i >= waiting.length) i = 0;
+					}, 800);
+				}
+				$("#videocenter").show();
+			};
+			video.onplaying = function() {
+				if(timerId != -1) {
+					window.clearInterval(timerId);
+					timerId = -1;
+					i = 0;
+				}
+				$("#videocenter").slideUp("slow"); 
+			}
+			
+			$("#videocenter").click(function(){
+				if("播放" == $("#videocenter-text").html())
+				{
+					video.play();
+				}
+				else if("随便看看" == $("#videocenter-text").html())
+				{
+					video.src = "http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4";
+					video.play();
+				}
+			});
+
+			$("#clearVideo").click(function() {
+				video.src = "";
+				$("#videocenter-text").html(randomView);
+				$("#videocenter").show(); 
+			});
+			/** 视频操作 end **/
+			
+			/** 图片操作 **/
+			
+			/** 图片操作 end **/
 			
 			var arr = [
-			<!-- "http://placehold.it/1500x1500", -->
-			<!-- "http://placehold.it/1000x1000", -->
-				"http://placehold.it/50x50", 
-				"http://placehold.it/100x100",
+				"http://placehold.it/1920x1080",
+				"http://placehold.it/1920x1080",
 				"http://placehold.it/1920x1080"
 			];
 			var imgIndex = 0;

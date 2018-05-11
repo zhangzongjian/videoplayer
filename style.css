@@ -30,6 +30,10 @@ button.prev {
 	height: 80px;
 }
 
+video {
+	background-color: black;
+}
+
 .tabs-main {
     padding: 0rem;
 }
@@ -54,7 +58,7 @@ input.form-control {
 
 .font-size-big {
 	font-size: .9rem;
-	margin-bottom: 0rem
+	margin-bottom: 5px;
 }
 
 .code, .size{
@@ -67,4 +71,29 @@ input.form-control {
 
 .pager {
 	margin-top: 5px;
+}
+
+.videocontrol {
+	position: relative;
+    float: right;
+    top: 9px;
+    right: 20px;
+}
+
+#videocenter {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 90px;
+    margin: auto;
+    width: 90px;
+    height: 35px;
+	z-index: 99;
+}
+
+#panel585 {
+	position: relative;
+    top: 0;
+    left: 0;
 }
