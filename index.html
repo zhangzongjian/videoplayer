@@ -6,12 +6,10 @@
   <title>Foundation | Welcome</title> 
   <link href="css/bootstrap.css" rel="stylesheet" /> 
   <link rel="stylesheet" href="css/foundation.min.css" /> 
-  <link rel="stylesheet" href="css/style_s.css" /> 
+	<link rel="stylesheet" type="text/css" href="css/zoom.css">  
   <link rel="stylesheet" href="style.css" /> 
  </head> 
  <body> 
-  <!-- Start Top Bar --> 
-  <!-- End Top Bar --> 
   <div class="grid-container"> 
    <nav class="navbar-inverse navbar"> 
     <div class="container"> 
@@ -34,16 +32,18 @@
        <a href="#">忘记密码?</a> 
       </form> 
      </div> 
-     <!--/.navbar-collapse --> 
+
     </div> 
    </nav> 
    <div class="tabs-content" data-tabs-content="panel-content584"> 
     <div class="tabs-panel tabs-main is-active" id="panel586"> 
-     <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit=""> 
+     <div class="orbit gallery" role="region" aria-label="Favorite Space Pictures" data-orbit=""> 
       <ul class="orbit-container"> 
-       <button class="orbit-previous prev" aria-label="previous"> </button> 
-       <button class="orbit-next next" aria-label="next"> </button> 
-       <li class="orbit-slide is-active" style="text-align:center"> <img class="img-main" src="http://placehold.it/1920x1080" /> </li> 
+       <button class="prevImg">上一张</button> 
+       <button class="nextImg">下一张</button> 
+       <li class="orbit-slide is-active" style="text-align:center">
+		<a href="http://placehold.it/1920x1080"><img id="img-main" src="http://placehold.it/1920x1080" /></a>
+	   </li> 
       </ul> 
      </div> 
     </div> 
@@ -78,23 +78,27 @@
     </div> 
    </div> 
    <div class="grid-x small-up-2 large-up-4 grid-padding-x"> 
-    <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+    <div class="cell gallery"> 
+	 <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-big"> ID:100001 <span class="size"><font class="score">5</font>积分</span> </h5> 
      <a href="#" class="button expanded">播放</a> 
     </div> 
-    <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+    <div class="cell gallery"> 
+	 <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+     <h5 class="font-size-big"> ID:100001 <span class="size"><font class="score">5</font>积分</span> </h5> 
+     <a href="#" class="button expanded">播放</a> 
+    </div> 
+    <div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-big">ID:100001</h5> 
      <a href="#" class="button expanded">播放</a> 
     </div> 
-    <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
-     <h5 class="font-size-big">ID:100001</h5> 
-     <a href="#" class="button expanded">播放</a> 
-    </div> 
-    <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+    <div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-big">ID:100001</h5> 
      <a href="#" class="button expanded">播放</a> 
     </div> 
@@ -121,38 +125,44 @@
    <div class="text-center"> 
    </div> 
    <div class="grid-x small-up-2 medium-up-3 large-up-6 grid-padding-x"> 
-    <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+    <div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small"> ID:100001 <span class="size">大小：600M</span> </h5> 
      <p class="font-size-small"> <a href="#">百度网盘</a> <span class="code">提取码：????</span> </p> 
      <a href="#" class="button small expanded hollow">提取码（<font class="score" color="green">5</font>积分）</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small"> ID:100001 <span class="size">大小：600M</span> </h5> 
      <p class="font-size-small"> <a href="#">百度网盘</a> <span class="code">提取码：Xa4g</span> </p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/350x240" /> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small">ID:100001</h5> 
      <p class="font-size-small"><a href="#">百度网盘</a></p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small">ID:100001</h5> 
      <p class="font-size-small"><a href="#">百度网盘</a></p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small">ID:100001</h5> 
      <p class="font-size-small"><a href="#">百度网盘</a></p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+     <li><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/250x140"><img class="thumbnail" src="http://placehold.it/250x140" /></a></li>
      <h5 class="font-size-small">ID:100001</h5> 
      <p class="font-size-small"><a href="#">百度网盘</a></p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
@@ -167,12 +177,15 @@
    </ul> 
    <hr /> 
   </div> 
+  <div class="clear"></div>
   <script src="js/jquery.js"></script> 
   <script src="js/foundation.js"></script> 
+  <script>$(document).foundation();</script>
+  <script src="js/jquery-1.7.2.min.js"></script> 
   <script src="js/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+  <script type="text/javascript" src="js/zoom.min.js"></script>
   <script>
-			$(document).foundation();
-			
 			/** 数据初始化 **/
 			var imgMainArr = [
 				"http://placehold.it/1920x1080",
@@ -188,15 +201,15 @@
 			/** 图片操作 **/
 			var imgIndex = 0;
 			var imgLen = imgMainArr.length;
-			$(".prev").click(function(){
+			$(".prevImg").click(function(){
 				imgIndex--;
 				if(imgIndex < 0) imgIndex = imgLen - 1;
-				$(".img-main").attr("src", imgMainArr[imgIndex]);
+				$("#img-main").attr("src", imgMainArr[imgIndex]);
 			});
-			$(".next").click(function(){
+			$(".nextImg").click(function(){
 				imgIndex++;
 				if(imgIndex > imgLen - 1) imgIndex = 0;
-				$(".img-main").attr("src", imgMainArr[imgIndex]);
+				$("#img-main").attr("src", imgMainArr[imgIndex]);
 			});
 			/** 图片操作 end **/
 			

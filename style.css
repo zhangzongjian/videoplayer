@@ -79,7 +79,7 @@ input.form-control {
     left: 0;
 }
 
-button.prev,button.next {
+button.prevImg,button.nextImg {
 	display: block;
     background: url(img/arrow_2.png) no-repeat;
     width: 37px;
@@ -87,25 +87,32 @@ button.prev,button.next {
     overflow: hidden;
     top: 50%;
     text-indent: -9999px;
-    z-index: 999999;
 }
 
-button.next:hover {
+button.nextImg:hover {
     background-position: -37px -63px;
 }
 
-button.next {
+button.nextImg {
     background-position: -37px 0;
+	position: absolute;
+	left: auto;
+    right: 0;
 }
 
-button.prev:hover {
+button.prevImg:hover {
     background-position: 0 -63px;
 }
 
-button.prev {
+button.prevImg {
     background-position: 0 0;
+	position: absolute;
+	left: 0;
 }
 
+.gallery li {
+	list-style-type: none;
+}
 
 
     
