@@ -11,25 +11,6 @@ article {
     padding-right: 10px;
 }
 
-button.prev, button.next {
-    display: block;
-    background-image: url(./img/arrow.png);
-    background-repeat: no-repeat;
-    z-index: 9;
-}
-
-button.next {
-    background-position: -57px -398px;
-	width: 32px;
-	height: 80px;
-}
-
-button.prev {
-	background-position: -19px -99px;
-	width: 32px;
-	height: 80px;
-}
-
 video {
 	background-color: black;
 }
@@ -97,3 +78,34 @@ input.form-control {
     top: 0;
     left: 0;
 }
+
+button.prev,button.next {
+	display: block;
+    background: url(img/arrow_2.png) no-repeat;
+    width: 37px;
+    height: 63px;
+    overflow: hidden;
+    top: 50%;
+    text-indent: -9999px;
+    z-index: 999999;
+}
+
+button.next:hover {
+    background-position: -37px -63px;
+}
+
+button.next {
+    background-position: -37px 0;
+}
+
+button.prev:hover {
+    background-position: 0 -63px;
+}
+
+button.prev {
+    background-position: 0 0;
+}
+
+
+
+    
