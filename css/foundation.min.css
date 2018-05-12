@@ -7116,9 +7116,7 @@ html.is-reveal-open body {
 }
 
 .switch {
-    height: 2rem;
     position: relative;
-    margin-bottom: 1rem;
     outline: 0;
     font-size: .875rem;
     font-weight: 700;

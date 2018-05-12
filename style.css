@@ -87,6 +87,10 @@ button.prevImg,button.nextImg {
     overflow: hidden;
     top: 50%;
     text-indent: -9999px;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 button.nextImg:hover {
@@ -114,5 +118,7 @@ button.prevImg {
 	list-style-type: none;
 }
 
-
+img {
+	cursor: -webkit-zoom-in;
+}
     
