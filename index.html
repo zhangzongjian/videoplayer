@@ -57,13 +57,13 @@
       <source src=""></source> your browser does not support the video tag 
      </video> 
      <ul class="videocontrol pager"> 
-      <li><a><font color="black">ID:100001</font></a></li> 
+      <li><a><font color="black">ID:<span id="videoPlayingId">000000</span></font></a></li> 
       <li id="clearVideo"><a>清除</a></li> 
      </ul> 
     </div> 
    </div> 
    <ul class="tabs" data-tabs="" id="panel-content584" style="border-top:0px"> 
-    <li class="tabs-title is-active"> <a href="#panel586">看图</a> </li> 
+    <li class="tabs-title is-active"> <a href="#panel586">图库</a> </li> 
     <li class="tabs-title"> <a href="#panel585" aria-selected="true">播放器</a> </li> 
    </ul> 
    <div class="callout primary top-bar"> 
@@ -134,7 +134,7 @@
      <a href="#" class="button small expanded hollow">提取码</a> 
     </div> 
     <div class="cell"> 
-     <img class="thumbnail" src="http://placehold.it/250x140" /> 
+     <img class="thumbnail" src="http://placehold.it/350x240" /> 
      <h5 class="font-size-small">ID:100001</h5> 
      <p class="font-size-small"><a href="#">百度网盘</a></p> 
      <a href="#" class="button small expanded hollow">提取码</a> 
@@ -173,6 +173,33 @@
   <script>
 			$(document).foundation();
 			
+			/** 数据初始化 **/
+			var imgMainArr = [
+				"http://placehold.it/1920x1080",
+				"http://placehold.it/920x880",
+				"http://placehold.it/1920x1080",
+				"http://placehold.it/786x1080"
+			];
+			
+			var videoPlaying = {id:"1000001", src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"};
+			$("#video").attr("src", videoPlaying.src);
+			/** 数据初始化 end **/	
+			
+			/** 图片操作 **/
+			var imgIndex = 0;
+			var imgLen = imgMainArr.length;
+			$(".prev").click(function(){
+				imgIndex--;
+				if(imgIndex < 0) imgIndex = imgLen - 1;
+				$(".img-main").attr("src", imgMainArr[imgIndex]);
+			});
+			$(".next").click(function(){
+				imgIndex++;
+				if(imgIndex > imgLen - 1) imgIndex = 0;
+				$(".img-main").attr("src", imgMainArr[imgIndex]);
+			});
+			/** 图片操作 end **/
+			
 			/** 视频操作 **/
 			var pause = "播放";
 			var waiting = ["缓冲中","缓冲中.","缓冲中..","缓冲中..."];
@@ -209,7 +236,7 @@
 				}
 				$("#videocenter").slideUp("slow"); 
 			}
-			
+			//视频中间按键
 			$("#videocenter").click(function(){
 				if("播放" == $("#videocenter-text").html())
 				{
@@ -221,7 +248,7 @@
 					video.play();
 				}
 			});
-
+			//清除
 			$("#clearVideo").click(function() {
 				video.src = "";
 				$("#videocenter-text").html(randomView);
@@ -229,30 +256,6 @@
 			});
 			/** 视频操作 end **/
 			
-			/** 图片操作 **/
-			
-			/** 图片操作 end **/
-			
-			var arr = [
-				"http://placehold.it/1920x1080",
-				"http://placehold.it/1920x1080",
-				"http://placehold.it/1920x1080"
-			];
-			var imgIndex = 0;
-			var imgLen = arr.length;
-			<!-- $(function(){ -->
-				<!-- $(".img-main").attr("src", arr[imgIndex]); -->
-			<!-- }); -->
-			$(".prev").click(function(){
-				imgIndex--;
-				if(imgIndex < 0) imgIndex = imgLen - 1;
-				$(".img-main").attr("src", arr[imgIndex]);
-			});
-			$(".next").click(function(){
-				imgIndex++;
-				if(imgIndex > imgLen - 1) imgIndex = 0;
-				$(".img-main").attr("src", arr[imgIndex]);
-			});
 		</script>   
  </body>
 </html>
