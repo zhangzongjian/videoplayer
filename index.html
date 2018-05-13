@@ -29,7 +29,7 @@
         <input type="text" placeholder="邮箱[选填]" class="form-control" /> 
        </div> 
        <button type="submit" class="btn btn-success" style="height:2.4375rem"><b>登录 / 注册</b></button> 
-       <a href="#">忘记密码?</a> 
+       <a href="javascript:noData()">忘记密码?</a> 
       </form> 
      </div> 
 
@@ -42,10 +42,10 @@
        <button class="prevImg">上一张</button> 
        <button class="nextImg">下一张</button> 
        <li class="orbit-slide is-active" style="text-align:center">
-		<a href="http://placehold.it/1920x1080"><img id="img-main" src="#" /></a>
+		<a href="http://placehold.it/1920x1080"><img id="img-main" src="http://placehold.it/1920x1080" /></a>
 	   </li>
 	   <li style="display:none">
-		<a href="http://placehold.it/998x586"><img id="img-main" src="#" /></a>
+		<a href="http://placehold.it/960x540"><img id="img-main" src="http://placehold.it/960x540" /></a>
 	   </li>
       </ul> 
      </div> 
@@ -55,8 +55,6 @@
       <li><a style="background-color: rgba(0, 0, 0, 0)"><font color="white" id="videocenter-text">随便看看</font></a></li> 
      </ul> 
      <video width="100%" controls="" id="video" poster="" controlslist="nodownload"> 
-      <!-- <source src="http://192.168.1.7/D%3A/%E9%9F%B3%E9%A2%91%E8%A7%86%E9%A2%91/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/07.mp4"> --> 
-      <!-- <source src="http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"> --> 
       <source src=""></source> your browser does not support the video tag 
      </video> 
      <ul class="videocontrol pager"> 
@@ -82,36 +80,36 @@
    </div> 
    <div id="videoList" class="grid-x small-up-2 large-up-4 grid-padding-x"> 
     <div class="cell gallery"> 
-	 <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-big"> ID:100001 <span class="videoScore"><font>5</font>积分</span> </h5> 
-     <a href="#" class="button expanded">播放</a> 
+	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放</a> 
     </div> 
     <div class="cell gallery"> 
-	 <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-big"> ID:100001 <span class="videoScore"><font>5</font>积分</span> </h5> 
-     <a href="#" class="button expanded">播放</a> 
+	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放</a> 
     </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-big">ID:100001</h5> 
-     <a href="#" class="button expanded">播放</a> 
+	<div class="cell gallery"> 
+	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放</a> 
     </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-big">ID:100001</h5> 
-     <a href="#" class="button expanded">播放</a> 
+	<div class="cell gallery"> 
+	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放</a> 
     </div> 
    </div> 
-   <ul class="pager"> 
-    <li> <a href="#">首页</a> </li> 
-    <li> <a href="#">上一页</a> </li> 
+   <ul id="videoPager" class="pager"> 
+    <li> <a href="javascript:noData()">首页</a> </li> 
+    <li> <a href="javascript:noData()">上一页</a> </li> 
     <select class="form-control"> <option value="1">1</option> </select> 
-    <li> <a href="#">下一页</a> </li> 
-    <li> <a href="#">末页</a> </li> 
+    <li> <a href="javascript:noData()">下一页</a> </li> 
+    <li> <a href="javascript:noData()">末页</a> </li> 
    </ul> 
    <hr /> 
    <div class="callout primary top-bar"> 
@@ -129,54 +127,54 @@
    </div> 
    <div id="downloadList" class="grid-x small-up-2 medium-up-3 large-up-6 grid-padding-x"> 
     <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small"> ID:100001 <span class="size">大小：600M</span> </h5> 
-     <p class="font-size-small"> <a href="#">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
-     <a href="#" class="button small expanded hollow">提取码<span class="downloadScore">（<font>5</font>积分）</span></a> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div> 
     <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small"> ID:100001 <span class="size">大小：600M</span> </h5> 
-     <p class="font-size-small"> <a href="#">百度网盘</a> <span class="downloadCode">提取码：Xa4g</span> </p> 
-     <a href="#" class="button small expanded hollow">提取码</a> 
-    </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small">ID:100001</h5> 
-     <p class="font-size-small"><a href="#">百度网盘</a></p> 
-     <a href="#" class="button small expanded hollow">提取码</a> 
-    </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small">ID:100001</h5> 
-     <p class="font-size-small"><a href="#">百度网盘</a></p> 
-     <a href="#" class="button small expanded hollow">提取码</a> 
-    </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small">ID:100001</h5> 
-     <p class="font-size-small"><a href="#">百度网盘</a></p> 
-     <a href="#" class="button small expanded hollow">提取码</a> 
-    </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/250x140"><img src="#" /></a></li>
-     <h5 class="font-size-small">ID:100001</h5> 
-     <p class="font-size-small"><a href="#">百度网盘</a></p> 
-     <a href="#" class="button small expanded hollow">提取码</a> 
-    </div> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
    </div> 
-   <ul class="pager"> 
-    <li> <a href="#">首页</a> </li> 
-    <li> <a href="#">上一页</a> </li> 
+   <ul id="downloadPager" class="pager"> 
+    <li> <a href="javascript:noData()">首页</a> </li> 
+    <li> <a href="javascript:noData()">上一页</a> </li> 
     <select class="form-control"> <option value="1">1</option> </select> 
-    <li> <a href="#">下一页</a> </li> 
-    <li> <a href="#">末页</a> </li> 
+    <li> <a href="javascript:noData()">下一页</a> </li> 
+    <li> <a href="javascript:noData()">末页</a> </li> 
    </ul> 
    <hr /> 
   </div> 
