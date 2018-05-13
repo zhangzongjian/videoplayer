@@ -7481,8 +7481,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .thumbnail {
     display: inline-block;
     max-width: 100%;
-    margin-bottom: .5rem;
-    border: solid 4px #fefefe;
+    margin-bottom: 5px;
     border-radius: 0;
     -webkit-box-shadow: 0 0 0 1px rgba(10,10,10,.2);
     box-shadow: 0 0 0 1px rgba(10,10,10,.2);

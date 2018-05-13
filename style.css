@@ -42,12 +42,8 @@ input.form-control {
 	margin-bottom: 5px;
 }
 
-.code, .size{
+.downloadCode, .videoScore, .size{
 	float: right;
-}
-
-.size {
-	margin-right: 8px;
 }
 
 .pager {
@@ -120,5 +116,11 @@ button.prevImg {
 
 img {
 	cursor: -webkit-zoom-in;
+}
+
+.cell li {
+	border: 3px solid #ddd;
+    padding: 4px;
+	text-align: center;
 }
     
