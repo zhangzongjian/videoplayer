@@ -1,5 +1,20 @@
 /** 数据初始化 **/
 //用户
+
+$.ajax(
+  {
+	url:"http://localhost:8080/videoconsole/tests",
+	type:"POST",
+	dataType:'json',
+	success:function(data) {
+		alert(data.test);
+	},
+	error:function(data) {
+		alert(data);
+	}
+  }
+);	
+
 var myScore = 2;
 var server = "localhost/videoplay/";
 //图库
