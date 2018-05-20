@@ -2,84 +2,97 @@
 //用户
 
 var myScore = 2;
+var videoPager = {};
+var downloadPager = {};
+var server = "http://192.168.1.7:8080/videoconsole";
 
 //图库
 var imgMainArr = [];
-doAjax("picture", "list", {pageNo:2, pageEach:4}, function(data){
+doAjax("picture", "list", {pageNo:1}, function(data){
 	var pageData = data.pageData;
 	for(var i in pageData) {
-		imgMainArr.push(pageData[i].url+"-test");
+		imgMainArr.push(pageData[i]);
 	}
-	$("#img-main").attr("src", imgMainArr[0]);
+	$("#img-main").attr("src", imgMainArr[0].url+"-image");
+	$("#img-main").parent().attr("href", imgMainArr[0].url+"-image");
+	$("#pictureId").html(imgMainArr[0].id);
+	$("#pictureGuid").html("1/"+imgMainArr.length);
 });
 
-//播放器
-var videoPlaying = {id:"1000002", src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"};
-$("#video").attr("src", videoPlaying.src);
-$("#videoPlayingId").html(videoPlaying.id);
 //播放区 每页8个
-var pager = {pageNo:2, pageSum:10, pageEach:8};
-var videoArr = [
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:0, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:1, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:0, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:1, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:0, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:1, src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"},
-];
-var imgHtml;
-var videoHtml = "";
-videoArr.forEach(function(video){
-	imgHtml = "";
-	video.imgs.forEach(function(imgSrc, index){
-		imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + imgSrc + '"><img src="' + imgSrc + '" /></a></li>';
-	});
-	videoHtml += 
-	'<div class="cell gallery">' +
-	 imgHtml +
-     '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoScore"><font>' + video.score + '</font>积分</span> </h5>' +
-     '<a href="javascript:void(0)" class="button expanded">播放</a>' +
-    '</div>';
-});
-$("#videoList").html(videoHtml);
-$("#videoPager").html(getPagerHtml(pager));
-
-
-//下载区 每页8个
-var pager = {pageNo:1, pageSum:11, pageEach:8};
-var downloadArr = [
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-	{id:"1000002", imgs:["http://placehold.it/250x140", "http://placehold.it/1920x1080", "http://placehold.it/786x1080"], score:5, downloadUrl:"https://pan.baidu.com/s/1F4haUzfN8lv30hS4AGZE_g", size:"335M"},
-]
-var downloadHtml = "";
-var imgHtml;
-downloadArr.forEach(function(download){
-	imgHtml = "";
-	download.imgs.forEach(function(imgSrc, index){
-		imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + imgSrc + '"><img src="' + imgSrc + '" /></a></li>';
-	});
-	downloadHtml += 
-	'<div class="cell gallery">' +
-	 imgHtml +
-     '<h5 class="font-size-small"> ID:' + download.id + ' <span class="size">大小：' + download.size + '</span> </h5>' +
-     '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> ' +
-     '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span class="downloadScore">（<font>' + download.score + '</font>积分）</span></a> ' +
-    '</div>';
-});
-$("#downloadList").html(downloadHtml);
-$("#downloadPager").html(getPagerHtml(pager));
+//下载区 每页12个
+var videoArr;
+var videoMap;
+var downloadArr;
+goPage(1, 1);
+goPage(1, 2);
+function goPage(pageNo, type) {
+	if(pageNo < 1) pageNo =  videoPager.pageSum;
+	else if(pageNo > videoPager.pageSum) pageNo = 1;
+	if(type == 1) {
+		doAjax("video", "list", {pageNo:pageNo}, function(data){
+			var pageData = data.pageData;
+			var id;
+			videoArr = [];
+			videoMap = {};
+			for(var i in pageData) {
+				videoArr.push(pageData[i]);
+				id = pageData[i].id;
+				videoMap[id] = pageData[i];
+			}
+			var imgHtml;
+			var videoHtml = "";
+			var screenImgUrl;
+			videoArr.forEach(function(video){
+				imgHtml = "";
+				video.screenImgs.forEach(function(screenImg, index){
+					screenImgUrl = screenImg.url + '-screen';
+					imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + screenImgUrl + '"><img src="' + screenImgUrl + '" /></a></li>';
+				});
+				videoHtml += 
+				'<div class="cell gallery">' +
+				 imgHtml +
+				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoScore" '+((video.score==0)?'style="display:none"':'')+'><font>' + video.score + '</font>积分</span> </h5>' +
+				 '<a href="javascript:void(0)" class="button expanded" onclick="play(\'' + video.id + '\')">播放</a>' +
+				'</div>';
+			});
+			videoPager.pageNo = data.pageNo;
+			videoPager.pageSum = data.pageSum;
+			$("#videoList").html(videoHtml);
+			$("#videoPager").html(getPagerHtml(videoPager, type));
+		});
+	}
+	else if(type == 2) {
+		doAjax("download", "list", {pageNo:pageNo}, function(data){
+			var pageData = data.pageData;
+			downloadArr = [];
+			for(var i in pageData) {
+				downloadArr.push(pageData[i]);
+			}
+			var downloadHtml = "";
+			var imgHtml;
+			downloadArr.forEach(function(download, index){
+				imgHtml = "";
+				var screenImgUrl;
+				download.screenImgs.forEach(function(screenImg, index){
+					screenImgUrl = screenImg.url + '-screen';
+					imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + screenImgUrl + '"><img src="' + screenImgUrl + '" /></a></li>';
+				});
+				downloadHtml += 
+				'<div class="cell gallery">' +
+				 imgHtml +
+				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="size">大小：' + download.fileSize + '</span> </h5>' +
+				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> ' +
+				 '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span class="downloadScore">（<font>' + download.score + '</font>积分）</span></a> ' +
+				'</div>';
+			});
+			downloadPager.pageNo = data.pageNo;
+			downloadPager.pageSum = data.pageSum;
+			$("#downloadList").html(downloadHtml);
+			$("#downloadPager").html(getPagerHtml(downloadPager, type));
+		});
+	}
+}
 /** 数据初始化 end **/	
 
 /** 图片操作 **/
@@ -89,7 +102,9 @@ $(".prevImg").click(function(){
 	if(imgLen >0) {
 		imgIndex--;
 		if(imgIndex < 0) imgIndex = imgLen - 1;
-		$("#img-main").attr("src", imgMainArr[imgIndex]);
+		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
+		$("#pictureId").html(imgMainArr[imgIndex].id);
+		$("#pictureGuid").html((imgIndex+1)+"/"+imgMainArr.length);
 	}
 	else noData();
 });
@@ -98,7 +113,9 @@ $(".nextImg").click(function(){
 	if(imgLen >0) {
 		imgIndex++;
 		if(imgIndex > imgLen - 1) imgIndex = 0;
-		$("#img-main").attr("src", imgMainArr[imgIndex]);
+		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
+		$("#pictureId").html(imgMainArr[imgIndex].id);
+		$("#pictureGuid").html((imgIndex+1)+"/"+imgMainArr.length);
 	}
 	else noData();
 });
@@ -140,6 +157,17 @@ video.onplaying = function() {
 	}
 	$("#videocenter").slideUp("slow"); 
 }
+//播放
+function play(videoId) {
+	videoPlaying = videoMap[videoId];
+	if(!videoPlaying) {
+		noData();
+		return;
+	}
+	$("#video").attr("src", videoPlaying.playUrl);
+	$("#videoPlayingId").html(videoPlaying.id);
+	video.play();
+}
 //视频中间按键
 $("#videocenter").click(function(){
 	if("播放" == $("#videocenter-text").html())
@@ -166,12 +194,12 @@ $("#clearVideo").click(function() {
 /** 视频操作 end **/
 
 /** 翻页操作 **/
-function getPagerHtml(pager) {
+function getPagerHtml(pager, type) {
 	var optionHtml;
 	var pagerHtml =
-		(pager.pageNo!=1?'<li> <a href="javascript:goPage(1)">首页</a> </li> ':'') +
-		(pager.pageNo!=1?'<li> <a href="javascript:goPage(' + (pager.pageNo-1) + ')">上一页</a> </li> ':'') +
-			'<select class="form-control" onchange="goPage(this.value)">' +
+		'<li> <a href="javascript:goPage(1, '+type+')">首页</a> </li> ' +
+		'<li> <a href="javascript:goPage(' + (pager.pageNo-1) + ', '+type+')">上一页</a> </li> ' +
+			'<select class="form-control" onchange="goPage(this.value, '+type+')">' +
 				function(){
 					optionHtml = "";
 					for(var i = 1; i<=pager.pageSum; i++) {
@@ -180,12 +208,9 @@ function getPagerHtml(pager) {
 					return optionHtml;
 				}() +
 			'</select> ' +
-		(pager.pageNo!=pager.pageSum?'<li> <a href="javascript:goPage(' + (pager.pageNo+1) + ')">下一页</a> </li> ':'') +
-		(pager.pageNo!=pager.pageSum?'<li> <a href="javascript:goPage(' + pager.pageSum + ')">末页</a> </li> ':'');
+		'<li> <a href="javascript:goPage(' + (pager.pageNo+1) + ', '+type+')">下一页</a> </li> ' +
+		'<li> <a href="javascript:goPage(' + pager.pageSum + ', '+type+')">末页</a> </li> ';
 	return pagerHtml;
-}
-function goPage(pageNo) {
-	alert(pageNo);
 }
 /** 翻页操作 end **/
 
@@ -196,8 +221,9 @@ function noData() {
 function doAjax(type, op, pager, callback) {
 	$.ajax(
 	  {
-		url:"http://localhost:8080/videoconsole/"+type+"/"+op+"/"+pager.pageNo,
+		url:server+"/"+type+"/"+op+"/"+pager.pageNo,
 		type:"POST",
+		async:false,
 		data:{pageEach:pager.pageEach},
 		dataType:'json',
 		success:function(data) {

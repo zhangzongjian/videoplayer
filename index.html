@@ -36,7 +36,7 @@
     </div> 
    </nav> 
    <div class="tabs-content" data-tabs-content="panel-content584"> 
-    <div class="tabs-panel tabs-main is-active" id="panel586"> 
+    <div class="tabs-panel tabs-main is-active" id="panelPicture"> 
      <div class="orbit gallery" role="region" aria-label="Favorite Space Pictures" data-orbit=""> 
       <ul class="orbit-container"> 
        <button class="prevImg">上一张</button> 
@@ -44,13 +44,14 @@
        <li class="orbit-slide is-active" style="text-align:center">
 		<a href="http://placehold.it/1920x1080"><img id="img-main" src="http://placehold.it/1920x1080" /></a>
 	   </li>
-	   <li style="display:none">
-		<a href="http://placehold.it/960x540"><img id="img-main" src="http://placehold.it/960x540" /></a>
-	   </li>
-      </ul> 
+      </ul>
+	   <ul class="videocontrol pager"> 
+		  <li><a><font color="black">ID:<span id="pictureId">000000</span></font></a></li> 
+		  <li><a><font color="black"><span id="pictureGuid">0/0</span></font></a></li> 
+	   </ul> 
      </div> 
     </div> 
-    <div class="tabs-panel tabs-main" id="panel585"> 
+    <div class="tabs-panel tabs-main" id="panelVideo" style="position:relative"> 
      <ul class="pager" id="videocenter"> 
       <li><a style="background-color: rgba(0, 0, 0, 0)"><font color="white" id="videocenter-text">随便看看</font></a></li> 
      </ul> 
@@ -59,13 +60,13 @@
      </video> 
      <ul class="videocontrol pager"> 
       <li><a><font color="black">ID:<span id="videoPlayingId">000000</span></font></a></li> 
-      <li id="clearVideo"><a>停止</a></li> 
+      <li id="clearVideo"><a>停止加载</a></li> 
      </ul> 
     </div> 
    </div> 
    <ul class="tabs" data-tabs="" id="panel-content584" style="border-top:0px"> 
-    <li class="tabs-title is-active"> <a href="#panel586">图库</a> </li> 
-    <li class="tabs-title"> <a href="#panel585" aria-selected="true">播放器</a> </li> 
+    <li class="tabs-title is-active"> <a href="#panelPicture">图片区</a> </li> 
+    <li class="tabs-title"> <a href="#panelVideo" aria-selected="true">播放器</a> </li> 
    </ul> 
    <div class="callout primary top-bar"> 
     <h3 class="top-bar-left" style="margin: 0px;">视频播放区</h3> 
