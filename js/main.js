@@ -1,29 +1,22 @@
 /** 数据初始化 **/
 //用户
 
-$.ajax(
-  {
-	url:"http://localhost:8080/videoconsole/tests",
-	type:"POST",
-	dataType:'json',
-	success:function(data) {
-		alert(data.test);
-	},
-	error:function(data) {
-		alert(data);
-	}
-  }
-);	
-
 var myScore = 2;
-var server = "localhost/videoplay/";
+
 //图库
 var imgMainArr = [];
-//$("#img-main").attr("src", imgMainArr[0]);
+doAjax("picture", "list", {pageNo:2, pageEach:4}, function(data){
+	var pageData = data.pageData;
+	for(var i in pageData) {
+		imgMainArr.push(pageData[i].url+"-test");
+	}
+	$("#img-main").attr("src", imgMainArr[0]);
+});
+
 //播放器
 var videoPlaying = {id:"1000002", src:"http://vd3.bdstatic.com/mda-iba247rx1ffpppb7/mda-iba247rx1ffpppb7.mp4"};
-//$("#video").attr("src", videoPlaying.src);
-//$("#videoPlayingId").html(videoPlaying.id);
+$("#video").attr("src", videoPlaying.src);
+$("#videoPlayingId").html(videoPlaying.id);
 //播放区 每页8个
 var pager = {pageNo:2, pageSum:10, pageEach:8};
 var videoArr = [
@@ -91,8 +84,8 @@ $("#downloadPager").html(getPagerHtml(pager));
 
 /** 图片操作 **/
 var imgIndex = 0;
-var imgLen = imgMainArr.length;
 $(".prevImg").click(function(){
+	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
 		imgIndex--;
 		if(imgIndex < 0) imgIndex = imgLen - 1;
@@ -101,6 +94,7 @@ $(".prevImg").click(function(){
 	else noData();
 });
 $(".nextImg").click(function(){
+	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
 		imgIndex++;
 		if(imgIndex > imgLen - 1) imgIndex = 0;
@@ -197,4 +191,18 @@ function goPage(pageNo) {
 
 function noData() {
 	alert("数据不存在");
+}
+
+function doAjax(type, op, pager, callback) {
+	$.ajax(
+	  {
+		url:"http://localhost:8080/videoconsole/"+type+"/"+op+"/"+pager.pageNo,
+		type:"POST",
+		data:{pageEach:pager.pageEach},
+		dataType:'json',
+		success:function(data) {
+			callback(data);
+		}
+	  }
+	);
 }
