@@ -223,11 +223,12 @@ function doAjax(type, op, pager, callback) {
 	  {
 		url:server+"/"+type+"/"+op+"/"+pager.pageNo,
 		type:"POST",
-		async:false,
+		async:true,
 		data:{pageEach:pager.pageEach},
 		dataType:'json',
 		success:function(data) {
 			callback(data);
+			$.getScript('js/zoom.min.js');
 		}
 	  }
 	);
