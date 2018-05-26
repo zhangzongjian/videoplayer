@@ -27,9 +27,9 @@ var downloadArr;
 goPage(1, 1);
 goPage(1, 2);
 function goPage(pageNo, type) {
-	if(pageNo < 1) pageNo =  videoPager.pageSum;
-	else if(pageNo > videoPager.pageSum) pageNo = 1;
 	if(type == 1) {
+		if(pageNo < 1) pageNo =  videoPager.pageSum;
+		else if(pageNo > videoPager.pageSum) pageNo = 1;
 		doAjax("video", "list", {pageNo:pageNo}, function(data){
 			var pageData = data.pageData;
 			var id;
@@ -46,14 +46,17 @@ function goPage(pageNo, type) {
 			videoArr.forEach(function(video){
 				imgHtml = "";
 				video.screenImgs.forEach(function(screenImg, index){
-					screenImgUrl = screenImg.url + '-screen';
-					imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + screenImgUrl + '"><img src="' + screenImgUrl + '" /></a></li>';
+					screenImgUrl = screenImg.url;
+					if(index==0)
+						imgHtml += '<li><a href="' + screenImgUrl + '"><img src="' + screenImgUrl.replace('?', '-screen?') + '" /></a></li>';
+					else
+						imgHtml += '<li style="display:none"><a href="' + screenImgUrl + '"></a></li>';
 				});
 				videoHtml += 
 				'<div class="cell gallery">' +
 				 imgHtml +
-				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoScore" '+((video.score==0)?'style="display:none"':'')+'><font>' + video.score + '</font>积分</span> </h5>' +
-				 '<a href="javascript:void(0)" class="button expanded" onclick="play(\'' + video.id + '\')">播放</a>' +
+				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoTime">' + video.videoTime + '</span> </h5>' +
+				 '<a href="#panelVideo" class="button expanded" onclick="play(\'' + video.id + '\')">播放<span class="videoScore">（<font>' + video.score + '</font>积分）</span></a>' +
 				'</div>';
 			});
 			videoPager.pageNo = data.pageNo;
@@ -63,7 +66,9 @@ function goPage(pageNo, type) {
 		});
 	}
 	else if(type == 2) {
-		doAjax("download", "list", {pageNo:pageNo}, function(data){
+		if(pageNo < 1) pageNo =  downloadPager.pageSum;
+		else if(pageNo > downloadPager.pageSum) pageNo = 1;
+		doAjax("download", "list", {pageNo:pageNo, pageEach:4}, function(data){
 			var pageData = data.pageData;
 			downloadArr = [];
 			for(var i in pageData) {
@@ -75,14 +80,17 @@ function goPage(pageNo, type) {
 				imgHtml = "";
 				var screenImgUrl;
 				download.screenImgs.forEach(function(screenImg, index){
-					screenImgUrl = screenImg.url + '-screen';
-					imgHtml += '<li ' + (index==0?'':'style="display:none"') + '><a href="' + screenImgUrl + '"><img src="' + screenImgUrl + '" /></a></li>';
+					screenImgUrl = screenImg.url;
+					if(index==0)
+						imgHtml += '<li><a href="' + screenImgUrl + '"><img src="' + screenImgUrl.replace('?', '-screen?') + '" /></a></li>';
+					else
+						imgHtml += '<li style="display:none"><a href="' + screenImgUrl + '"></a></li>';
 				});
 				downloadHtml += 
 				'<div class="cell gallery">' +
 				 imgHtml +
-				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="size">大小：' + download.fileSize + '</span> </h5>' +
-				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> ' +
+				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="videoTime">' + download.videoTime + '</span> </h5>' +
+				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="size">大小：' + download.fileSize + '</span> </p> ' +
 				 '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span class="downloadScore">（<font>' + download.score + '</font>积分）</span></a> ' +
 				'</div>';
 			});
@@ -166,6 +174,7 @@ function play(videoId) {
 	}
 	$("#video").attr("src", videoPlaying.playUrl);
 	$("#videoPlayingId").html(videoPlaying.id);
+	$($(".tabs-title")[1]).click();
 	video.play();
 }
 //视频中间按键
@@ -189,6 +198,7 @@ $("#clearVideo").click(function() {
 	}
 	video.src = "";
 	$("#videocenter-text").html(randomView);
+	$("#videoPlayingId").html("000000");
 	$("#videocenter").show(); 
 });
 /** 视频操作 end **/

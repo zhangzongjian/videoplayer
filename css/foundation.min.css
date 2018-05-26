@@ -7433,15 +7433,21 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
     background: #1673b1;
 }
 
-.tabs-title {
-    float: left;
+@media (min-width: 768px) {
+	.tabs-title {
+		float: left;
+	}
 }
+
+.tabs-title {
+	border-right: 3px solid #e6e6e6;
+}
+
 
 .tabs-title>a {
     display: block;
     padding: 1.25rem 1.5rem;
     font-size: .75rem;
-    line-height: 1;
     color: #1779ba;
 }
 

@@ -66,16 +66,17 @@
    </div> 
    <ul class="tabs" data-tabs="" id="panel-content584" style="border-top:0px"> 
     <li class="tabs-title is-active"> <a href="#panelPicture">图片区</a> </li> 
-    <li class="tabs-title"> <a href="#panelVideo" aria-selected="true">播放器</a> </li> 
+    <li class="tabs-title"> <a href="#panelVideo">播放器</a> </li> 
+	<li class="tabs-title"> <a href="#panelScore">获取积分</a> </li> 
    </ul> 
    <div class="callout primary top-bar"> 
     <h3 class="top-bar-left" style="margin: 0px;">视频播放区</h3> 
     <div class="top-bar-right"> 
      <ul class="menu top-bar-right"> 
-      <li> <input type="search" placeholder="Search" width="" size="15" /> 
+      <li> <input type="search" placeholder="ID" width="" size="8" /> 
        <div> 
        </div> </li> 
-      <li> <button type="button" class="button">Search</button> </li> 
+      <li> <button type="button" class="button">搜索</button> </li> 
      </ul> 
     </div> 
    </div> 
@@ -83,26 +84,26 @@
     <div class="cell gallery"> 
 	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
-     <a href="javascript:noData()" class="button expanded">播放</a> 
-    </div> 
-    <div class="cell gallery"> 
+     <h5 class="font-size-big"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放<!-- <span class="videoScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
 	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
-     <a href="javascript:noData()" class="button expanded">播放</a> 
+     <h5 class="font-size-big"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放<!-- <span class="videoScore">（<font>5</font>积分）</span> --></a> 
     </div> 
 	<div class="cell gallery"> 
 	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
-     <a href="javascript:noData()" class="button expanded">播放</a> 
+     <h5 class="font-size-big"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放<!-- <span class="videoScore">（<font>5</font>积分）</span> --></a> 
     </div> 
 	<div class="cell gallery"> 
 	 <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-big"> ID:000000 <!-- <span class="videoScore"><font>5</font>积分</span> --> </h5> 
-     <a href="javascript:noData()" class="button expanded">播放</a> 
+     <h5 class="font-size-big"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <a href="javascript:noData()" class="button expanded">播放<!-- <span class="videoScore">（<font>5</font>积分）</span> --></a> 
     </div> 
    </div> 
    <ul id="videoPager" class="pager"> 
@@ -117,10 +118,10 @@
     <h3 class="top-bar-left" style="margin: 0px;">视频下载区</h3> 
     <div class="top-bar-right"> 
      <ul class="menu top-bar-right"> 
-      <li> <input type="search" placeholder="Search" width="" size="15" /> 
+      <li> <input type="search" placeholder="ID" width="" size="8" /> 
        <div> 
        </div> </li> 
-      <li> <button type="button" class="button">Search</button> </li> 
+      <li> <button type="button" class="button">搜索</button> </li> 
      </ul> 
     </div> 
    </div> 
@@ -130,43 +131,43 @@
     <div class="cell gallery"> 
      <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
-     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
-    </div> 
-    <div class="cell gallery"> 
-     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
-	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
      <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div>
 	<div class="cell gallery"> 
      <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
      <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div>
 	<div class="cell gallery"> 
      <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
      <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div>
 	<div class="cell gallery"> 
      <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
      <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div>
 	<div class="cell gallery"> 
      <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
 	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
-     <h5 class="font-size-small"> ID:000000 <span class="size">大小：0M</span> </h5> 
-     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="downloadCode">提取码：????</span> </p> 
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
+     <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
+    </div>
+	<div class="cell gallery"> 
+     <li><a href="http://placehold.it/250x140"><img src="http://placehold.it/250x140" /></a></li>
+	 <li style="display:none"><a href="http://placehold.it/500x280"><img src="http://placehold.it/500x280" /></a></li>
+     <h5 class="font-size-small"> ID:000000 <span class="videoTime">00:00:00</span> </h5> 
+     <p class="font-size-small"> <a href="javascript:noData()">百度网盘</a> <span class="size">大小：0M</span> </p> 
      <a href="javascript:noData()" class="button small expanded hollow">提取码<!-- <span class="downloadScore">（<font>5</font>积分）</span> --></a> 
     </div>
    </div> 

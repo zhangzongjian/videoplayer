@@ -42,7 +42,7 @@ input.form-control {
 	margin-bottom: 5px;
 }
 
-.downloadCode, .videoScore, .size{
+.videoTime, .size{
 	float: right;
 }
 
