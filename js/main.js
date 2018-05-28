@@ -7,8 +7,8 @@ var downloadPager = {};
 var server = "http://192.168.1.7:8080/videoconsole";
 
 //图库
-var imgMainArr;
-doAjax("picture", "list", {pageNo:1}, function(data){
+var imgMainArr = [];
+doAjax("picture/list/"+pageNo, {sort:'id'}, function(data){
 	var pageData = data.pageData;
 	imgMainArr = [];
 	for(var i in pageData) {
@@ -42,7 +42,7 @@ function goPage(pageNo, type) {
 	if(type == 1) {
 		if(pageNo < 1) pageNo =  videoPager.pageSum;
 		else if(pageNo > videoPager.pageSum) pageNo = 1;
-		doAjax("video", "list", {pageNo:pageNo, sort:'id'}, function(data){
+		doAjax("video/list/"+pageNo, {sort:'id'}, function(data){
 			var pageData = data.pageData;
 			var id;
 			videoArr = [];
@@ -80,7 +80,7 @@ function goPage(pageNo, type) {
 	else if(type == 2) {
 		if(pageNo < 1) pageNo =  downloadPager.pageSum;
 		else if(pageNo > downloadPager.pageSum) pageNo = 1;
-		doAjax("download", "list", {pageNo:pageNo, pageEach:4}, function(data){
+		doAjax("download/list"+pageNo, {sort:'id'}, function(data){
 			var pageData = data.pageData;
 			downloadArr = [];
 			downloadMap = {};
@@ -243,10 +243,10 @@ function noData() {
 	alert("数据不存在");
 }
 
-function doAjax(type, op, data, callback) {
+function doAjax(url, data, callback) {
 	$.ajax(
 	  {
-		url:server+"/"+type+"/"+op+"/"+data.pageNo,
+		url:server+"/"+url;
 		type:"POST",
 		async:true,
 		data: data,
@@ -258,3 +258,34 @@ function doAjax(type, op, data, callback) {
 	  }
 	);
 }
+
+$("#loginCheckbox").change(function(){
+	if(this.checked) {
+		$("#loginBtn").html("<b>登录</b>");
+		$("#email").hide();
+		$("#loginBtn").addClass("btn-success");
+		$("#loginBtn").removeClass("btn-primary");
+	}
+	else {
+		$("#loginBtn").html("<b>注册</b>");
+		$("#email").show();
+		$("#loginBtn").removeClass("btn-success");
+		$("#loginBtn").addClass("btn-primary");
+	}
+});
+
+$("#loginBtn").click(function() {
+	var username = $("#username").value();
+	var password = $("#password").value();
+	var email = $("#email").value();
+	if($("#loginCheckbox")[0].checked) {
+		doAjax("login", {username:username, password:password}, function(data) {
+			
+		});
+	}
+	else {
+		doAjax("register", {username:username, password:password, email:email}, function(data) {
+			
+		});
+	}
+});

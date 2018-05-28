@@ -125,11 +125,15 @@ img {
 }
 
 .txt {
-	font-size: 22px;
 	text-shadow: 0px 5px 20px #008888, 5px 0px 20px #008888, 0px -5px 20px #008888, -5px 0px 20px #008888;
 	//text-decoration: underline;
 	font-family: "rounded-mplus-1c-regular";
 	color: white;
 	text-align: center;
+}
+
+.user_op {
+	text-decoration: underline;
+	cursor: pointer;
 }
     

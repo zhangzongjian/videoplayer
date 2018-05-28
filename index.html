@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <title>Foundation | Welcome</title> 
   <link href="css/bootstrap.css" rel="stylesheet" /> 
+  <link rel="stylesheet" href="http://www.bootcss.com/p/bootstrap-switch/static/stylesheets/bootstrapSwitch.css">
   <link rel="stylesheet" href="css/foundation.min.css" /> 
 	<link rel="stylesheet" type="text/css" href="css/zoom.css">  
   <link rel="stylesheet" href="style.css" /> 
@@ -18,19 +19,25 @@
       <a class="navbar-brand" href="#">Project name</a> 
      </div> 
      <div id="navbar" class="navbar-collapse collapse"> 
-      <form class="navbar-form navbar-right" style="line-height:3"> 
+      <form class="navbar-form navbar-right" style="line-height:3;display:none"> 
        <div class="form-group"> 
-        <input type="text" placeholder="用户名" class="form-control" /> 
+        <input type="text" placeholder="用户名" class="form-control" id="username" /> 
        </div> 
        <div class="form-group"> 
-        <input type="password" placeholder="密码" class="form-control" /> 
+        <input type="password" placeholder="密码" class="form-control" id="password" /> 
        </div> 
        <div class="form-group"> 
-        <input type="text" placeholder="邮箱[选填]" class="form-control" /> 
+        <input type="text" placeholder="邮箱" class="form-control" id="email" style="display:none"/> 
        </div> 
-       <button type="submit" class="btn btn-success" style="height:2.4375rem"><b>登录 / 注册</b></button> 
+       <button type="button" class="btn btn-success" style="height:2.4375rem" id="loginBtn"><b>登录</b></button> 
        <a href="javascript:noData()">忘记密码?</a> 
+	   <div class="switch switch-small" data-on-label="注册" data-off-label="登录" data-off="success" style="float:right;margin-top: 10px;">
+		<input id="loginCheckbox" type="checkbox" checked />
+	   </div>
       </form> 
+	  <form class="navbar-form navbar-right" style="line-height:3"> 
+		<span class="txt">欢迎，<span id="loginName">XXX</span>【积分：<span id="loginScore">0</span>&nbsp;&nbsp;<span class="user_op">充值</span>】【<span class="user_op">修改密码</span>】【<span class="user_op">退出</span>】</span>
+	  </form>
      </div> 
 
     </div> 
@@ -191,6 +198,7 @@
   <script>$(document).foundation();</script>
   <script src="js/jquery-1.7.2.min.js"></script> 
   <script src="js/bootstrap.min.js"></script> 
+  <script src="http://www.bootcss.com/p/bootstrap-switch/static/js/bootstrapSwitch.js"></script>
   <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/zoom.min.js"></script>
