@@ -13,8 +13,18 @@ doAjax("picture", "list", {pageNo:1}, function(data){
 	for(var i in pageData) {
 		imgMainArr.push(pageData[i]);
 	}
-	$("#img-main").attr("src", imgMainArr[0].url+"-image");
-	$("#img-main").parent().attr("href", imgMainArr[0].url+"-image");
+	var imgHtml = '';
+	imgMainArr.forEach(function(img, index) {
+		if(index == 0) imgHtml += 
+			'<li class="orbit-slide is-active" style="text-align:center">' +
+				'<a href="' + img.url + '"><img id="img-main" src="' + img.url + '-image" /></a>' +
+			'</li>';
+		else imgHtml += 
+			'<li style="display:none">' +
+				'<a href="' + img.url + '"></a>' +
+			'</li>';
+	});
+	$("#pictureList").html(imgHtml);
 	$("#pictureId").html(imgMainArr[0].id);
 	$("#pictureGuid").html("1/"+imgMainArr.length);
 });
@@ -24,13 +34,14 @@ doAjax("picture", "list", {pageNo:1}, function(data){
 var videoArr;
 var videoMap;
 var downloadArr;
+var downloadMap;
 goPage(1, 1);
 goPage(1, 2);
 function goPage(pageNo, type) {
 	if(type == 1) {
 		if(pageNo < 1) pageNo =  videoPager.pageSum;
 		else if(pageNo > videoPager.pageSum) pageNo = 1;
-		doAjax("video", "list", {pageNo:pageNo}, function(data){
+		doAjax("video", "list", {pageNo:pageNo, sort:'id'}, function(data){
 			var pageData = data.pageData;
 			var id;
 			videoArr = [];
@@ -71,8 +82,11 @@ function goPage(pageNo, type) {
 		doAjax("download", "list", {pageNo:pageNo, pageEach:4}, function(data){
 			var pageData = data.pageData;
 			downloadArr = [];
+			downloadMap = {};
 			for(var i in pageData) {
 				downloadArr.push(pageData[i]);
+				id = pageData[i].id;
+				downloadMap[id] = pageData[i];
 			}
 			var downloadHtml = "";
 			var imgHtml;
@@ -108,8 +122,8 @@ var imgIndex = 0;
 $(".prevImg").click(function(){
 	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
+		if(imgIndex == 0) return;
 		imgIndex--;
-		if(imgIndex < 0) imgIndex = imgLen - 1;
 		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
 		$("#pictureId").html(imgMainArr[imgIndex].id);
 		$("#pictureGuid").html((imgIndex+1)+"/"+imgMainArr.length);
@@ -119,8 +133,8 @@ $(".prevImg").click(function(){
 $(".nextImg").click(function(){
 	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
+		if(imgIndex == imgLen - 1) return;
 		imgIndex++;
-		if(imgIndex > imgLen - 1) imgIndex = 0;
 		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
 		$("#pictureId").html(imgMainArr[imgIndex].id);
 		$("#pictureGuid").html((imgIndex+1)+"/"+imgMainArr.length);
@@ -228,13 +242,13 @@ function noData() {
 	alert("数据不存在");
 }
 
-function doAjax(type, op, pager, callback) {
+function doAjax(type, op, data, callback) {
 	$.ajax(
 	  {
-		url:server+"/"+type+"/"+op+"/"+pager.pageNo,
+		url:server+"/"+type+"/"+op+"/"+data.pageNo,
 		type:"POST",
 		async:true,
-		data:{pageEach:pager.pageEach},
+		data: data,
 		dataType:'json',
 		success:function(data) {
 			callback(data);
