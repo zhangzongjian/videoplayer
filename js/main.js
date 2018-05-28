@@ -7,9 +7,10 @@ var downloadPager = {};
 var server = "http://192.168.1.7:8080/videoconsole";
 
 //图库
-var imgMainArr = [];
+var imgMainArr;
 doAjax("picture", "list", {pageNo:1}, function(data){
 	var pageData = data.pageData;
+	imgMainArr = [];
 	for(var i in pageData) {
 		imgMainArr.push(pageData[i]);
 	}
