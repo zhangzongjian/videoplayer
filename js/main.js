@@ -246,7 +246,7 @@ function noData() {
 function doAjax(url, data, callback) {
 	$.ajax(
 	  {
-		url:server+"/"+url;
+		url:server+"/"+url,
 		type:"POST",
 		async:true,
 		data: data,
