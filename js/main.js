@@ -8,7 +8,7 @@ var server = "http://192.168.1.7:8080/videoconsole";
 
 //图库
 var imgMainArr = [];
-doAjax("picture/list/"+pageNo, {sort:'id'}, function(data){
+doAjax("picture/list/1", {sort:'id'}, function(data){
 	var pageData = data.pageData;
 	imgMainArr = [];
 	for(var i in pageData) {
