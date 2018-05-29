@@ -1,10 +1,14 @@
 /** 数据初始化 **/
 //用户
 
-var myScore = 2;
+var myScore;
 var videoPager = {};
 var downloadPager = {};
 var server = "http://192.168.1.7:8080/videoconsole";
+
+doAjax("checkLogin", {}, function(data){
+	onLogin(data);
+});
 
 //图库
 var imgMainArr = [];
@@ -68,7 +72,7 @@ function goPage(pageNo, type) {
 				'<div class="cell gallery">' +
 				 imgHtml +
 				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoTime">' + video.videoTime + '</span> </h5>' +
-				 '<a href="#panelVideo" class="button expanded" onclick="play(\'' + video.id + '\')">播放<span class="videoScore">（<font>' + video.score + '</font>积分）</span></a>' +
+				 '<a href="#panelVideo" class="button expanded" onclick="play(\'' + video.id + '\')">播放<span '+(video.score==0?'style="display:none"':'')+'>（<font class="score" '+(video.score>myScore?'color="red"':'')+'>' + video.score + '</font>积分）</span></a>' +
 				'</div>';
 			});
 			videoPager.pageNo = data.pageNo;
@@ -80,7 +84,7 @@ function goPage(pageNo, type) {
 	else if(type == 2) {
 		if(pageNo < 1) pageNo =  downloadPager.pageSum;
 		else if(pageNo > downloadPager.pageSum) pageNo = 1;
-		doAjax("download/list"+pageNo, {sort:'id'}, function(data){
+		doAjax("download/list/"+pageNo, {sort:'id'}, function(data){
 			var pageData = data.pageData;
 			downloadArr = [];
 			downloadMap = {};
@@ -106,7 +110,7 @@ function goPage(pageNo, type) {
 				 imgHtml +
 				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="videoTime">' + download.videoTime + '</span> </h5>' +
 				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="size">大小：' + download.fileSize + '</span> </p> ' +
-				 '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span class="downloadScore">（<font>' + download.score + '</font>积分）</span></a> ' +
+				 '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span '+(download.score==0?'style="display:none"':'')+'>（<font class="score" '+(download.score>myScore?'color="red"':'')+'>' + download.score + '</font>积分）</span></a> ' +
 				'</div>';
 			});
 			downloadPager.pageNo = data.pageNo;
@@ -249,11 +253,16 @@ function doAjax(url, data, callback) {
 		url:server+"/"+url,
 		type:"POST",
 		async:true,
+		xhrFields: {  
+          withCredentials: true  
+        },  
 		data: data,
 		dataType:'json',
 		success:function(data) {
 			callback(data);
-			$.getScript('js/zoom.min.js');
+			if(data.pageData) {
+				$.getScript('js/zoom.min.js');
+			}
 		}
 	  }
 	);
@@ -275,17 +284,65 @@ $("#loginCheckbox").change(function(){
 });
 
 $("#loginBtn").click(function() {
-	var username = $("#username").value();
-	var password = $("#password").value();
-	var email = $("#email").value();
+	var username = $("#username").val();
+	var password = $("#password").val();
+	var email = $("#email").val();
 	if($("#loginCheckbox")[0].checked) {
 		doAjax("login", {username:username, password:password}, function(data) {
-			
+			onLogin(data);
 		});
 	}
 	else {
 		doAjax("register", {username:username, password:password, email:email}, function(data) {
-			
+			if(data.isOk) {
+				doAjax("login", {username:username, password:password}, function(data) {
+					onLogin(data);
+				});
+			}
+			else {
+				alert(data.msg);
+			}
 		});
 	}
 });
+
+function onLogin(data) {
+	if(data.isOk) {
+		myScore = data.score;
+		$("#formLogin").hide();
+		$("#formUser").show();
+		$("#loginName").html(data.username);
+		$("#loginScore").html(myScore);
+		refreshScore();
+	}
+	else {
+		if(data.msg) alert(data.msg);
+	}
+}
+
+$("#logout").click(function() {
+	doAjax("logout", {}, function(data) {
+		if(data.isOk) {
+			myScore = undefined;
+			$("#formLogin")[0].reset();
+			$("#formLogin").show();
+			$("#formUser").hide();
+			refreshScore();
+		}
+	});
+});
+
+function refreshScore() {
+	var len = $(".score").length;
+	var score;
+	var $score;
+	for(var i = 0; i<len; i++)
+	{
+		$score = $($(".score")[i]); 
+		score = $score.html();
+		if(score > myScore)
+			$($(".score")[i]).attr("color", "red");
+		else
+			$($(".score")[i]).removeAttr("color");
+	}
+}
