@@ -110,7 +110,7 @@ function goPage(pageNo, type) {
 				 imgHtml +
 				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="videoTime">' + download.videoTime + '</span> </h5>' +
 				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="size">大小：' + download.fileSize + '</span> </p> ' +
-				 '<a href="javascript:void(0)" class="button small expanded hollow">提取码<span '+(download.score==0?'style="display:none"':'')+'>（<font class="score" '+(download.score>myScore?'color="red"':'')+'>' + download.score + '</font>积分）</span></a> ' +
+				 '<a id="d' + download.id + '" href="javascript:getCode(\'' + download.id + '\', \'' + download.score + '\')" class="button small expanded hollow">提取码<span '+(download.score==0?'style="display:none"':'')+'>（<font class="score" '+(download.score>myScore?'color="red"':'')+'>' + download.score + '</font>积分）</span></a> ' +
 				'</div>';
 			});
 			downloadPager.pageNo = data.pageNo;
@@ -260,6 +260,10 @@ function doAjax(url, data, callback) {
 		dataType:'json',
 		success:function(data) {
 			callback(data);
+			if(data.isOk == 0)
+			{
+				if(data.msg) alert(data.msg);
+			}
 			if(data.pageData) {
 				$.getScript('js/zoom.min.js');
 			}
@@ -299,9 +303,6 @@ $("#loginBtn").click(function() {
 					onLogin(data);
 				});
 			}
-			else {
-				alert(data.msg);
-			}
 		});
 	}
 });
@@ -315,9 +316,6 @@ function onLogin(data) {
 		$("#loginScore").html(myScore);
 		refreshScore();
 	}
-	else {
-		if(data.msg) alert(data.msg);
-	}
 }
 
 $("#logout").click(function() {
@@ -325,12 +323,40 @@ $("#logout").click(function() {
 		if(data.isOk) {
 			myScore = undefined;
 			$("#formLogin")[0].reset();
+			if($("#loginCheckbox")[0].checked)
+			{
+				$($("#loginCheckbox")[0]).trigger("click");
+				$($("#loginCheckbox")[0]).trigger("click");
+			}
 			$("#formLogin").show();
 			$("#formUser").hide();
 			refreshScore();
 		}
 	});
 });
+
+function getCode(id, score) {
+	if(myScore == undefined) {
+		alert("请先登录！");
+	}
+	else if(myScore < score) {
+		alert("积分不足！");
+	}
+	else
+	doAjax("getCode", {id:id}, function(data) {
+		if(data.isOk) {
+			myScore = data.score;
+			alert(data.code);
+			var clipboard = new Clipboard("#d"+id ,{ 
+			   text: function(trigger) { 
+				  alert("提取码已复制");
+				  return data.code; 
+			   }
+			});
+			$("#d"+id).attr("href", "javascript:void(0)");
+		}
+	});
+}
 
 function refreshScore() {
 	var len = $(".score").length;
@@ -345,4 +371,8 @@ function refreshScore() {
 		else
 			$($(".score")[i]).removeAttr("color");
 	}
+}
+
+function showCode() { //显示提取码
+	
 }
