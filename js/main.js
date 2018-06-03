@@ -2,8 +2,10 @@
 //用户
 
 var myScore;
+var unlocks = {};
 var videoPager = {};
 var downloadPager = {};
+var clipboardMap = {};
 var server = "http://192.168.1.7:8080/videoconsole";
 
 doAjax("checkLogin", {}, function(data){
@@ -117,6 +119,7 @@ function goPage(pageNo, type) {
 			downloadPager.pageSum = data.pageSum;
 			$("#downloadList").html(downloadHtml);
 			$("#downloadPager").html(getPagerHtml(downloadPager, type));
+			showCode();
 		});
 	}
 }
@@ -127,7 +130,10 @@ var imgIndex = 0;
 $(".prevImg").click(function(){
 	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
-		if(imgIndex == 0) return;
+		if(imgIndex == 0) {
+			alert("没有了！");
+			return;
+		}
 		imgIndex--;
 		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
 		$("#pictureId").html(imgMainArr[imgIndex].id);
@@ -138,7 +144,10 @@ $(".prevImg").click(function(){
 $(".nextImg").click(function(){
 	var imgLen = imgMainArr.length;
 	if(imgLen >0) {
-		if(imgIndex == imgLen - 1) return;
+		if(imgIndex == imgLen - 1) {
+			alert("没有了！");
+			return;
+		}
 		imgIndex++;
 		$("#img-main").attr("src", imgMainArr[imgIndex].url+"-image");
 		$("#pictureId").html(imgMainArr[imgIndex].id);
@@ -309,19 +318,26 @@ $("#loginBtn").click(function() {
 
 function onLogin(data) {
 	if(data.isOk) {
-		myScore = data.score;
+		unlocks = data.unlocks;
 		$("#formLogin").hide();
 		$("#formUser").show();
 		$("#loginName").html(data.username);
-		$("#loginScore").html(myScore);
-		refreshScore();
+		updateMyScore(data.score);
+		if(videoPager.pageNo) goPage(videoPager.pageNo, 1);
+		if(downloadPager.pageNo) goPage(downloadPager.pageNo, 2);
 	}
+}
+
+function updateMyScore(score) {
+	myScore = score;
+	$("#loginScore").html(myScore);
 }
 
 $("#logout").click(function() {
 	doAjax("logout", {}, function(data) {
 		if(data.isOk) {
-			myScore = undefined;
+			updateMyScore(undefined);
+			unlocks = {};
 			$("#formLogin")[0].reset();
 			if($("#loginCheckbox")[0].checked)
 			{
@@ -330,7 +346,8 @@ $("#logout").click(function() {
 			}
 			$("#formLogin").show();
 			$("#formUser").hide();
-			refreshScore();
+			if(videoPager.pageNo) goPage(videoPager.pageNo, 1);
+			if(downloadPager.pageNo) goPage(downloadPager.pageNo, 2);
 		}
 	});
 });
@@ -345,34 +362,33 @@ function getCode(id, score) {
 	else
 	doAjax("getCode", {id:id}, function(data) {
 		if(data.isOk) {
-			myScore = data.score;
+			updateMyScore(data.score);
 			alert(data.code);
-			var clipboard = new Clipboard("#d"+id ,{ 
-			   text: function(trigger) { 
-				  alert("提取码已复制");
-				  return data.code; 
-			   }
-			});
-			$("#d"+id).attr("href", "javascript:void(0)");
+			setCode(id, data.code);
 		}
 	});
 }
 
-function refreshScore() {
-	var len = $(".score").length;
-	var score;
-	var $score;
-	for(var i = 0; i<len; i++)
-	{
-		$score = $($(".score")[i]); 
-		score = $score.html();
-		if(score > myScore)
-			$($(".score")[i]).attr("color", "red");
-		else
-			$($(".score")[i]).removeAttr("color");
-	}
+function showCode() {
+	downloadArr.forEach(function(download, index){
+		var id = download.id;
+		var code = unlocks[id];
+		if(code) {
+			setCode(id, code);
+		}
+	});
 }
 
-function showCode() { //显示提取码
-	
+function setCode(id, code) {
+	if(!clipboardMap[id]) {
+		var clipboard = new Clipboard("#d"+id ,{ 
+		   text: function(trigger) { 
+			  alert("提取码已复制");
+			  return code; 
+		   }
+		});
+		clipboardMap[id] = clipboard;
+	}
+	$("#d"+id).attr("href", "javascript:void(0)");
+	$("#d"+id).find('span').html("("+code+")");
 }
