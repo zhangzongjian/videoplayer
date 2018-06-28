@@ -7,7 +7,7 @@ var unlocks = {};
 var videoPager = {};
 var downloadPager = {};
 var clipboardMap = {};
-var server = "http://192.168.1.7:8080/videoconsole";
+var server = "http://jianplayer.tunnel.qydev.com/videoconsole";
 
 doAjax("checkLogin", {}, function(data){
 	onLogin(data);
@@ -405,5 +405,5 @@ function setCode(id, code) {
 
 function openPay() {
 	if(username == undefined) alert("请先登录！");
-	else window.open("http://jianplayer.tunnel.qydev.com/videoconsole/demo?id="+username);
+	else window.open(server+"/demo?id="+username);
 }
