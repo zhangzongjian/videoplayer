@@ -2,6 +2,7 @@
 //用户
 
 var myScore;
+var username;
 var unlocks = {};
 var videoPager = {};
 var downloadPager = {};
@@ -42,13 +43,15 @@ var videoArr;
 var videoMap;
 var downloadArr;
 var downloadMap;
+var searchID;
 goPage(1, 1);
 goPage(1, 2);
 function goPage(pageNo, type) {
 	if(type == 1) {
 		if(pageNo < 1) pageNo =  videoPager.pageSum;
 		else if(pageNo > videoPager.pageSum) pageNo = 1;
-		doAjax("video/list/"+pageNo, {sort:'id'}, function(data){
+		searchID = $("#searchID1").val();
+		doAjax("video/list/"+pageNo, {sort:'id', searchID:searchID}, function(data){
 			var pageData = data.pageData;
 			var id;
 			videoArr = [];
@@ -86,7 +89,8 @@ function goPage(pageNo, type) {
 	else if(type == 2) {
 		if(pageNo < 1) pageNo =  downloadPager.pageSum;
 		else if(pageNo > downloadPager.pageSum) pageNo = 1;
-		doAjax("download/list/"+pageNo, {sort:'id'}, function(data){
+		searchID = $("#searchID2").val();
+		doAjax("download/list/"+pageNo, {sort:'id', searchID:searchID}, function(data){
 			var pageData = data.pageData;
 			downloadArr = [];
 			downloadMap = {};
@@ -273,6 +277,10 @@ function doAjax(url, data, callback) {
 			{
 				if(data.msg) alert(data.msg);
 			}
+			else if(data.command)
+			{
+				location.reload();
+			}
 			if(data.pageData) {
 				$.getScript('js/zoom.min.js');
 			}
@@ -322,6 +330,7 @@ function onLogin(data) {
 		$("#formLogin").hide();
 		$("#formUser").show();
 		$("#loginName").html(data.username);
+		username = data.username;
 		updateMyScore(data.score);
 		if(videoPager.pageNo) goPage(videoPager.pageNo, 1);
 		if(downloadPager.pageNo) goPage(downloadPager.pageNo, 2);
@@ -337,6 +346,7 @@ $("#logout").click(function() {
 	doAjax("logout", {}, function(data) {
 		if(data.isOk) {
 			updateMyScore(undefined);
+			username = undefined;
 			unlocks = {};
 			$("#formLogin")[0].reset();
 			if($("#loginCheckbox")[0].checked)
@@ -391,4 +401,9 @@ function setCode(id, code) {
 	}
 	$("#d"+id).attr("href", "javascript:void(0)");
 	$("#d"+id).find('span').html("("+code+")");
+}
+
+function openPay() {
+	if(username == undefined) alert("请先登录！");
+	else window.open("http://jianplayer.tunnel.qydev.com/videoconsole/demo?id="+username);
 }

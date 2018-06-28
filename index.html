@@ -36,7 +36,7 @@
 	   </div>
       </form> 
 	  <form class="navbar-form navbar-right" style="line-height:3;display:none" id="formUser"> 
-		<span class="txt">欢迎，<span id="loginName">XXX</span>【积分：<span id="loginScore">0</span>&nbsp;&nbsp;<span class="user_op">获取积分</span>】【<span class="user_op">修改密码</span>】【<span class="user_op" id="logout">退出</span>】</span>
+		<span class="txt">欢迎，<span id="loginName">XXX</span>【积分：<span id="loginScore">0</span>&nbsp;&nbsp;<span class="user_op" onclick="openPay()">获取积分</span>】【<span class="user_op" id="logout">退出</span>】</span>
 	  </form>
      </div> 
 
@@ -79,16 +79,16 @@
    <ul class="tabs" data-tabs="" id="panel-content584" style="border-top:0px"> 
     <li class="tabs-title is-active"> <a href="#panelPicture">图片区</a> </li> 
     <li class="tabs-title"> <a href="#panelVideo">播放器</a> </li> 
-	<li class="tabs-title"> <a href="#panelScore">获取积分</a> </li> 
+	<li class="tabs-title"> <a href="javascript:openPay()">获取积分</a> </li> 
    </ul> 
    <div class="callout primary top-bar"> 
     <h3 class="top-bar-left" style="margin: 0px;">视频播放区</h3> 
     <div class="top-bar-right"> 
      <ul class="menu top-bar-right"> 
-      <li> <input type="search" placeholder="ID" width="" size="8" /> 
+      <li> <input type="search" placeholder="ID" width="" size="8" id="searchID1"/> 
        <div> 
        </div> </li> 
-      <li> <button type="button" class="button">搜索</button> </li> 
+      <li> <button type="button" class="button" onClick="goPage(1,1)">搜索</button> </li> 
      </ul> 
     </div> 
    </div> 
@@ -130,10 +130,10 @@
     <h3 class="top-bar-left" style="margin: 0px;">视频下载区</h3> 
     <div class="top-bar-right"> 
      <ul class="menu top-bar-right"> 
-      <li> <input type="search" placeholder="ID" width="" size="8" /> 
+      <li> <input type="search" placeholder="ID" width="" size="8"  id="searchID2"/> 
        <div> 
        </div> </li> 
-      <li> <button type="button" class="button">搜索</button> </li> 
+      <li> <button type="button" class="button" onClick="goPage(1,2)">搜索</button> </li> 
      </ul> 
     </div> 
    </div> 
