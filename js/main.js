@@ -277,9 +277,10 @@ function doAjax(url, data, callback) {
 			{
 				if(data.msg) alert(data.msg);
 			}
-			else if(data.command)
+			else if(data.returnUrl && data.openType)
 			{
-				location.reload();
+				if(data.openType == 1) location.href = returnUrl;
+				else window.open(returnUrl);
 			}
 			if(data.pageData) {
 				$.getScript('js/zoom.min.js');
