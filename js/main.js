@@ -1,4 +1,4 @@
-/** 数据初始化 **/
+﻿/** 数据初始化 **/
 //用户
 
 var myScore;
@@ -76,7 +76,7 @@ function goPage(pageNo, type) {
 				videoHtml += 
 				'<div class="cell gallery">' +
 				 imgHtml +
-				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoTime">' + video.videoTime + '</span> </h5>' +
+				 '<h5 class="font-size-big"> ID:' + video.id + ' <span class="videoTime">' + timeToStr(video.videoTime) + '</span> </h5>' +
 				 '<a href="#panelVideo" class="button expanded" onclick="play(\'' + video.id + '\')">播放<span '+(video.score==0?'style="display:none"':'')+'>（<font class="score" '+(video.score>myScore?'color="red"':'')+'>' + video.score + '</font>积分）</span></a>' +
 				'</div>';
 			});
@@ -111,11 +111,15 @@ function goPage(pageNo, type) {
 					else
 						imgHtml += '<li style="display:none"><a href="' + screenImgUrl + '"></a></li>';
 				});
+				var fileSize = download.fileSize;
+				if(fileSize/1024 < 1024) fileSize = Math.floor(fileSize/1024)+"KB";
+				else if(fileSize/1024/1024 < 1024) fileSize = Math.floor(fileSize/1024/1024)+"MB";
+				else fileSize = Math.floor(fileSize/1024/1024/1024)+"GB";
 				downloadHtml += 
 				'<div class="cell gallery">' +
 				 imgHtml +
-				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="videoTime">' + download.videoTime + '</span> </h5>' +
-				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="size">大小：' + download.fileSize + '</span> </p> ' +
+				 '<h5 class="font-size-small"> ID:' + download.id + ' <span class="videoTime">' + timeToStr(download.videoTime) + '</span> </h5>' +
+				 '<p class="font-size-small"> <a href="' + download.downloadUrl+ '" target="_blank">百度网盘</a> <span class="size">大小：' + fileSize + '</span> </p> ' +
 				 '<a id="d' + download.id + '" href="javascript:getCode(\'' + download.id + '\', \'' + download.score + '\')" class="button small expanded hollow">提取码<span '+(download.score==0?'style="display:none"':'')+'>（<font class="score" '+(download.score>myScore?'color="red"':'')+'>' + download.score + '</font>积分）</span></a> ' +
 				'</div>';
 			});
@@ -173,8 +177,7 @@ $("#videocenter").show();
 
 var video=document.getElementById("video");
 video.onended = function() {
-	$("#videocenter-text").html(randomView);
-	$("#videocenter").show(); 
+	$("#clearVideo").click();
 }
 video.onpause = function() { 
 	$("#videocenter-text").html(pause);
@@ -204,7 +207,7 @@ function play(videoId) {
 		noData();
 		return;
 	}
-	$("#video").attr("src", videoPlaying.playUrl);
+	video.src = videoPlaying.playUrl;
 	$("#videoPlayingId").html(videoPlaying.id);
 	$($(".tabs-title")[1]).click();
 	video.play();
@@ -217,7 +220,9 @@ $("#videocenter").click(function(){
 	}
 	else if("随便看看" == $("#videocenter-text").html())
 	{
-		video.src = "#";
+		videoPlaying = videoArr[Math.floor(Math.random()*videoArr.length)];
+		video.src = videoPlaying.playUrl;
+		$("#videoPlayingId").html(videoPlaying.id);
 		video.play();
 	}
 });
@@ -279,8 +284,8 @@ function doAjax(url, data, callback) {
 			}
 			else if(data.returnUrl && data.openType)
 			{
-				if(data.openType == 1) location.href = returnUrl;
-				else window.open(returnUrl);
+				if(data.openType == 1) location.href = data.returnUrl;
+				else window.open(data.returnUrl);
 			}
 			if(data.pageData) {
 				$.getScript('js/zoom.min.js');
@@ -408,3 +413,22 @@ function openPay() {
 	if(username == undefined) alert("请先登录！");
 	else window.open(server+"/demo?id="+username);
 }
+
+function timeToStr(second) {
+	var h = Math.floor(second/3600);
+	var m = Math.floor(second%3600/60);
+	var s = Math.floor(second%3600%60);
+	return pad(h, 2)+":"+pad(m, 2)+":"+pad(s, 2);
+}
+
+
+function pad(num, n) {  
+	return Array(n>(num.toString()).split('').length?(n-(''+num).length+1):0).join(0)+num;  
+}
+
+$("[type=search]").on("keydown", function(e){
+	var key = e.which;
+    if (key == 13) {
+		goPage(1, String(this.id).replace("searchID", ""));
+	}
+});

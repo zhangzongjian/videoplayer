@@ -57,7 +57,7 @@ input.form-control {
     right: 20px;
 }
 
-#videocenter {
+#videocenter, #loading{
 	position: absolute;
     top: 0;
     left: 0;
